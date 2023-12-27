@@ -1,0 +1,166 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Url } from "../../Global";
+import { MdHail } from "react-icons/md";
+
+
+const UserAdd = () => {
+  const [name, namechange] = useState("");
+  const [email, emailchange] = useState("");
+  const [mobile, mobilechange] = useState("");
+  const [username, usernamechange] = useState("");
+  const [password, passwordchange] = useState("");
+  const [staffId , staffIdchange] = useState("");
+  const navigate = useNavigate();
+
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    const staffdta = { name, email, mobile };
+    fetch(Url + "staff", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(staffdta),
+    })
+      .then((res) => {
+        alert("Saved Successfully");
+        navigate("/teamadd");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const [staffdtls, staffdtlschange] = useState(null);
+  useEffect(() => {
+    fetch(Url + "role_list")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        staffdtlschange(resp.data);
+        
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+
+  return (
+    <div>
+      <div className="row">
+        <div className="offset-lg-3 col-lg-6">
+          <form className="container" onSubmit={handlesubmit}>
+            <div className="card" style={{ textAlign: "left" }}>
+              <div className="card-title">
+                <h2 className="card-header">
+               <MdHail /> Team Management
+                </h2>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label>NAME : </label>
+                      <input
+                        required
+                        value={name}
+                        onChange={(e) => namechange(e.target.value)}
+                        className="form-control"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label>MOBILE : </label>
+                      <input
+                        required
+                        maxlength="10"
+                        value={mobile}
+                        onChange={(e) => mobilechange(e.target.value)}
+                        className="form-control"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label> EMAIL : </label>
+                      <input
+                        required
+                        value={email}
+                        onChange={(e) => emailchange(e.target.value)}
+                        className="form-control"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label>USERNAME : </label>
+                      <input
+                        required
+                        maxlength="10"
+                        value={username}
+                        onChange={(e) => usernamechange(e.target.value)}
+                        className="form-control"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label>PASSWORD : </label>
+                      <input type="password"
+                        required
+                        maxlength="10"
+                        value={password}
+                        onChange={(e) => passwordchange(e.target.value)}
+                        className="form-control"
+                      ></input>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                    <br></br>
+                      <label> ROLE TYPE : &nbsp;&nbsp; </label>
+                      <select onChange={(e)=> 
+                        staffIdchange(e.target.value)
+                      } className="form-select">
+                      <option>SELECT</option>;
+                        {staffdtls
+                        ? staffdtls.map((staffs) => {
+                          return <option value={staffs.id}>{staffs.name}</option>;
+                        } ) :null }
+                      </select>
+                    </div>
+                  </div>
+
+                  
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <div className="ldadd-btn">
+                        <button className="btn btn-success" type="submit">
+                          SAVE
+                        </button>
+                        <Link to="/leadlist" className="btn btn-danger">
+                          {" "}
+                          BACK{" "}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserAdd;

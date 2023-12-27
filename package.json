@@ -1,0 +1,82 @@
+{
+  "name": "kvrdp",
+  "version": "0.1.0",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "@date-io/date-fns": "^2.17.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.4",
+    "@mui/styles": "^5.13.2",
+    "@mui/x-data-grid": "^6.8.0",
+    "@mui/x-data-grid-generator": "^6.8.0",
+    "@mui/x-date-pickers": "^6.16.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "cdbreact": "^1.5.16",
+    "cors": "^2.8.5",
+    "file-saver": "^2.0.5",
+    "loginradius-react": "^0.2.0",
+    "material-react-table": "^1.12.0",
+    "material-ui-popup-state": "^5.0.10",
+    "mdb-react-ui-kit": "^6.1.0",
+    "mdbreact": "^4.17.0",
+    "outline-icons": "^2.2.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-datepicker": "^4.12.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.8.0",
+    "react-loading": "^2.0.3",
+    "react-paginate": "^8.2.0",
+    "react-rounded-image": "^2.0.15",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.7.3",
+    "react-swipeable-views": "^0.14.0",
+    "react-to-print": "^2.14.13",
+    "recharts": "^2.6.2",
+    "rsuite": "^5.38.0",
+    "styled-components": "^6.0.0-rc.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.7.32",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"    
+  },
+  "scripts": {
+    "start": "set PORT=3000 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+
+ 
+  
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+    <List>
+
+          {SidebarData &&
+            SidebarData.map((item, index) => (
+
+
+              <ListItemButton component="a" href={item.path}>
+                <ListItem key={item.title} disablePadding>
+
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.title} />
+                  {auth && (
+                    <h6>test</h6>
+                  )}
+                </ListItem>
+              </ListItemButton>
+
+
+            ))}
+        </List>
