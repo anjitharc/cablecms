@@ -41,6 +41,7 @@ import "./cmplist.css";
 import toast, { Toaster } from "react-hot-toast";
 import AddIcon from '@mui/icons-material/Add';
 import { FcPlus } from "react-icons/fc";
+import './cmplist.css';
 
 const CmplntList = () => {
   const [open, setOpen] = useState(false);
@@ -129,7 +130,16 @@ const CmplntList = () => {
       });
   }, []);
 
+    const [currentTime, setCurrentTime] = useState(new Date());
+  
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setCurrentTime(new Date());
+      }, 1000); // Update every second
 
+      return () => clearInterval(intervalId); // Cleanup on unmount
+    }, []);
+  
 
 
   return (
@@ -170,6 +180,7 @@ const CmplntList = () => {
                     <TableCell align="left"><b>CATOGORY</b></TableCell>
                     <TableCell align="left"><b>COMPLAINT</b></TableCell>
                     <TableCell align="left"><b>STAFF</b></TableCell>
+                    <TableCell align="center"><b>DURATION</b></TableCell>
                     <TableCell align="center"><b>ACTION</b></TableCell>
                   </TableRow>
                 </TableHead>
@@ -190,6 +201,7 @@ const CmplntList = () => {
                         <TableCell align="left">{row.category}</TableCell>
                         <TableCell align="left">{row.complaint}</TableCell>
                         <TableCell align="left">{row.assignedStaffName}</TableCell>
+                        <TableCell align="center">{currentTime.toLocaleTimeString()}</TableCell>
                         <TableCell align="center"> <div>
 
 
