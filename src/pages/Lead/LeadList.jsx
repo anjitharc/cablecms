@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserMinus, FaRegEdit, FaWindowClose } from "react-icons/fa";
-import PopupForm from "./LeadCreate";
-import LeadAddPop from "./LeadAddPop";
-import Pops from "./Pops";
-import LeadEdPop from "./LeadEdPop";
 import {
   Paper,
   Table,
@@ -17,8 +13,8 @@ import {
 import { Url } from "../../Global";
 import { BiUserPlus } from "react-icons/bi";
 import toast, { Toaster } from "react-hot-toast";
-import LeadEdit from "./LeadEdit";
 import LeadCreate from "./LeadCreate";
+import EditLead from "./EditLead";
 
 export default function LeadList() {
   const [cmpid, cmpidchange] = useState(null);
@@ -27,6 +23,9 @@ export default function LeadList() {
   const navigate = useNavigate();
   const [openPopuptwo, setOpenPopuptwo] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isPopupOpenLE, setPopupOpenLE] = useState(false);
+  const [variableToSend, setVariableToSend] = useState(null);
+
   const LoadEdit = (id) => {
     navigate("/leadedit/" + id);
   };
@@ -71,10 +70,12 @@ export default function LeadList() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [rmvstatus , isPopupOpen]);
+  }, [rmvstatus , isPopupOpen , isPopupOpenLE]);
 
   const editpops = (id) => {
-    setOpenPopuptwo(true);
+    setPopupOpenLE(true);
+    setVariableToSend(id);
+
   };
 
 
@@ -82,8 +83,16 @@ export default function LeadList() {
     setPopupOpen(true);
   };
 
+  const openPopupLE = () => {
+    setPopupOpenLE(true);
+  };
+
   const closePopup = () => {
     setPopupOpen(false);
+  };
+
+  const closePopupLE = () => {
+    setPopupOpenLE(false);
   };
 
   
@@ -101,7 +110,9 @@ export default function LeadList() {
             size={40}
             onClick={openPopup}
           />
-          {isPopupOpen && <PopupForm onClose={closePopup} />}
+          {isPopupOpen && <LeadCreate onClose={closePopup} />}
+          {isPopupOpenLE && <EditLead onClose={closePopupLE}  variableFromPage={variableToSend}/>}
+          
           <br></br>
           <br></br>
         </div>
@@ -158,7 +169,7 @@ export default function LeadList() {
                         size={20}
                         type="button"
                         onClick={() => {
-                          LoadEdit(row.id);
+                          editpops(row.id);
                         }}
                       />
                      
@@ -184,14 +195,7 @@ export default function LeadList() {
                 ))}
             </TableBody>
           </Table>
-        </TableContainer>
-
-        <LeadEdPop
-          openPopuptwo={openPopuptwo}
-          setOpenPopuptwo={setOpenPopuptwo}
-        >
-          <LeadEdit />
-        </LeadEdPop>
+        </TableContainer>      
      
       </div>
     </div>

@@ -1,3 +1,4 @@
+// src/components/PopupForm.js
 import React, { useEffect, useState } from "react";
 import "./PopupForm.css";
 import { Url } from "../../Global";
@@ -13,10 +14,7 @@ import {
 } from "@material-ui/core";
 import { IoIosCloseCircle } from "react-icons/io";
 import Controls from "../../components/controls/Controls";
-
-
-const LeadCreate = ({ onClose }) => {
-  
+const EditLead = ({ onClose, variableFromPage }) => {
   const [staffdtls, staffdtlschange] = useState(null);
   const [name, namechange] = useState("");
   const [address, addresschange] = useState("");
@@ -25,33 +23,40 @@ const LeadCreate = ({ onClose }) => {
   const [staffId, staffIdchange] = useState("");
   const [type, typechange] = useState("");
   const [leadCategory, leadCategorychnge] = useState("");
+  const [id, idchange] = useState("");
+  const [bookingNo, bookingNochng] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.preventDefault();
-    const leaddta = {
-      name,
-      address,
-      mobile,
-      leadThrough,
-      staffId,
-      type,
-      leadCategory,
-    };
-    fetch(Url + "lead", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(leaddta),
-    })
+  useEffect(() => {
+    fetch(Url + "lead/" + variableFromPage)
       .then((res) => {
-        onClose(); // Close the popup
+        return res.json();
+      })
+      .then((resp) => {
+        idchange(resp.data[0].id);
+        namechange(resp.data[0].name);
+        addresschange(resp.data[0].address);
+        mobilechange(resp.data[0].mobile);
+        bookingNochng(resp.data[0].bookingNo);
       })
       .catch((err) => {
         console.log(err.message);
       });
-    // Handle form submission logic here
-    // Example: Send form data to the server, close the popup, etc.
-  };
+  }, []);
+
+  const handleSubmit =(e) =>{
+    e.preventDefault();
+    const leaddta={id,name,address,mobile};
+    
+    fetch(Url + "lead/"+variableFromPage,{
+      method:"PUT",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify(leaddta)
+    }).then((res)=>{     
+    onClose();
+    }).catch((err)=>{
+      console.log(err.message)
+    })    
+    }
 
   useEffect(() => {
     fetch(Url + "staff")
@@ -72,8 +77,9 @@ const LeadCreate = ({ onClose }) => {
         <div className="card">
           <div className="card-body">
             <h5 align="left" className="card-header">
-              Create Lead
+              Lead Edit
             </h5>
+           
             <form onSubmit={handleSubmit}>
               {/* Example form fields */}
               <Grid container>
@@ -166,4 +172,4 @@ const LeadCreate = ({ onClose }) => {
   );
 };
 
-export default LeadCreate;
+export default EditLead;
