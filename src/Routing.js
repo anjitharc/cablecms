@@ -38,16 +38,17 @@ import TestWhats from './examples/TestWhats';
 import Settings from './pages/Master/Settings';
 import MasterList from './pages/Master/MasterList';
 import NCust from './pages/Customer/NCust';
+import CBroadband from './pages/Customer/CBroadband';
 
 
 
 const Routing = () => {
   return (
-    <div>
-      <Router basename={''}>
-
-          <Routes basename=''>
-            <Route path='/' element={<Dash />} >
+    
+      <Router>
+<div>
+          <Routes>
+            <Route path='/' exact element={<Dash />} >
             </Route>
             <Route path="*" render={() => "404 not found!"} />
             <Route path='/ncust' element={<NCust />}></Route>
@@ -59,7 +60,7 @@ const Routing = () => {
             <Route path="/leadedit/:ldid" element={<LeadEdit />} ></Route>
             <Route path="/about" element={<About />} ></Route>
             <Route path="/teamadd" element={<TeamAdd />} ></Route>
-       
+            <Route path="/cbroadband" element={<CBroadband />} ></Route>
             <Route path="/area" element={<Area />} ></Route>
             <Route path="/casualleadlist" element={<CasualLead />} ></Route>
             <Route path="/complaintctgry" element={<ComplaintCtgry />} > </Route>
@@ -83,11 +84,11 @@ const Routing = () => {
             <Route path='/custmenu' element={<CustMenu />}></Route>
             <Route path='/leadmenu' element={<LeadMenu />}></Route>
           </Routes>
-          
+          </div>
       </Router>
 
 
-    </div>
+  
   )
 }
 

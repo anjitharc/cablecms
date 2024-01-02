@@ -3,7 +3,7 @@ import './App.css';
 import Login from './Auth/Login';
 import axios from 'axios';
 import MiuiSide from './pages/nav/MiuiSide';
-import MasterList from './pages/Master/MasterList';
+import Footer from './pages/nav/Footer';
 //import TestCmp from './pages/Default/index'
 //import DefaultNav from './examples/Navbars/DefaultNavbar/DefaultNavbarDropdown'
 
@@ -50,7 +50,7 @@ function App() {
 <div className="App">
 
 <MiuiSide />
-
+<Footer />
  </div>
  
   );

@@ -38,7 +38,7 @@ import CustAddPop from "../Customer/CustAddPop";
 import CustomerAdd from "./CustomerAdd";
 import NCust from "./NCust";
 
-const LeadList = () => {
+const CBroadband = () => {
   const navigate = useNavigate();
   const [cuslist, cuslistchange] = useState(null);
   const [pageNo, pageNochange] = useState("1");
@@ -128,8 +128,8 @@ const LeadList = () => {
   return (
     <div>
       <Box height={10} />
-      <h5 align="left">Customer List - Cable TV</h5>
-      <div className="card">       
+      <div className="card">
+        <h3 className="card-header">CUSTOMER LIST</h3>
         <div className="card-body">
           <NativeSelect
             style={{ float: "left" }}
@@ -181,20 +181,14 @@ const LeadList = () => {
                     <TableCell align="center">
                       <b>CRF No</b>
                     </TableCell>
-                    <TableCell align="center">
-                      <b>LCO No</b>
-                    </TableCell>
                     <TableCell align="left">
                       <b>NAME</b>
                     </TableCell>
-                    <TableCell align="center">
+                    <TableCell align="left">
                       <b>PHONE</b>
                     </TableCell>
                     <TableCell align="left">
                       <b>ADDRESS</b>
-                    </TableCell>
-                    <TableCell align="center">
-                      <b>AMOUNT</b>
                     </TableCell>
                     <TableCell align="center">
                       <b>ACTION</b>
@@ -215,15 +209,13 @@ const LeadList = () => {
                         <Link to={"/custdtls/" + row.id}>
                           <TableCell align="center">{row.crfNumber} </TableCell>
                         </Link>
-                        <TableCell align="center">{row.crfNumber} </TableCell>
                         <TableCell align="left">
                           {" "}
                           {row.firstName}&nbsp;{row.middleName}&nbsp;
                           {row.lastName}
                         </TableCell>
-                        <TableCell align="center">{row.phone}</TableCell>
+                        <TableCell align="left">{row.phone}</TableCell>
                         <TableCell align="left">{row.address}</TableCell>
-                        <TableCell align="center">{"0"}</TableCell>
                         <TableCell align="center">
 
                           <EditIcon
@@ -313,4 +305,4 @@ const LeadList = () => {
 
   );
 };
-export default LeadList;
+export default CBroadband;

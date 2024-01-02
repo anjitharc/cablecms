@@ -17,8 +17,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import * as AiIcons from 'react-icons/ai'
-import { AiOutlineCodeSandbox, AiFillSetting } from "react-icons/ai";
+import { AiOutlineCodeSandbox, AiFillSetting,  AiOutlineUser } from "react-icons/ai";
 import { Fragment } from "react";
+
 
 import Routing from "../../Routing";
 import { SidebarData } from "./SidebarData";
@@ -26,6 +27,8 @@ import { Link } from "react-router-dom";
 import { Avatar, Button, ButtonBase, Menu, MenuItem, Tooltip } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useEffect } from "react";
+import {  Collapse } from '@mui/material';
+import { ExpandLess, ExpandMore, Inbox, Drafts, Star, Send } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -88,6 +91,8 @@ export default function MiuiSide() {
   const [setting, setsetting] = React.useState(true);
   const userstatus = JSON.parse(localStorage.getItem('data'));
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [drop, setDrop] = React.useState(false);
+
 
 
   useEffect(() => {
@@ -144,6 +149,11 @@ export default function MiuiSide() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleClick = () => {
+    setDrop(!drop);
+  };
+
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -225,18 +235,33 @@ export default function MiuiSide() {
               <ListItemIcon><AiOutlineCodeSandbox /></ListItemIcon>
               <ListItemText primary={"Company"} />
             </ListItemButton>
-          )}
-
-
-
-          {customers && (
-            <ListItemButton component="a" href="/custlist">
+          )}          
+            
+            <ListItemButton onClick={handleClick}>
 
               <ListItemIcon><AiIcons.AiOutlineContacts /></ListItemIcon>
               <ListItemText primary={"Customers"} />
-
+              {drop ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-          )}
+           
+           <Collapse in={drop} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton component="a" href="/Custlist">
+              <ListItemIcon>
+                <AiOutlineUser />
+              </ListItemIcon>
+              <ListItemText primary={"Cable TV"} />
+            </ListItemButton>
+            <ListItemButton component="a" href="/CBroadband">
+              <ListItemIcon>
+                <AiIcons.AiTwotoneDashboard />
+              </ListItemIcon>
+              <ListItemText primary={"Broadband"} />
+            </ListItemButton>
+          </List>
+        </Collapse>
+        
+          
 
           {lead && (
             <ListItemButton component="a" href="/Leadmenu">
@@ -278,9 +303,10 @@ export default function MiuiSide() {
 
             </ListItemButton>
           )}
-        </List>
-
+        </List>        
+        
         <Divider />
+
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
