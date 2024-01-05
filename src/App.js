@@ -2,8 +2,8 @@
 import './App.css';
 import Login from './Auth/Login';
 import axios from 'axios';
-import MiuiSide from './pages/nav/MiuiSide';
 import Footer from './pages/nav/Footer';
+import MasterLayout from './pages/MasterLayout';
 //import TestCmp from './pages/Default/index'
 //import DefaultNav from './examples/Navbars/DefaultNavbar/DefaultNavbarDropdown'
 
@@ -30,17 +30,9 @@ axios.create({
   baseURL: "http://103.146.174.105:8080/TECHNIQUES/techniques/" 
 });
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("data");
-  window.location.href = "/";
-};
-
 function App() {
 
   const token = localStorage.getItem("token");
-  const userdetails = JSON.parse(localStorage.getItem('data'));
-
 
   if (!token) {
     return <Login />;
@@ -49,7 +41,7 @@ function App() {
 
 <div className="App">
 
-<MiuiSide />
+<MasterLayout />
 <Footer />
  </div>
  

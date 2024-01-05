@@ -30,7 +30,7 @@ const Login = () => {
   async function loginUser(credentials) {
     setLoading(true);
     return fetch("http://103.146.174.105:8080/TECH/techniques/logins", {
-      method: "POST",
+      method: "POST",      
       headers: {
         "Content-Type": "application/json",
       },
@@ -111,7 +111,7 @@ return (
         
         </div>  
         <footer>
-           <center><h6 className="sticky-bottom">The Complete CableTV Complaint Registration System</h6></center> 
+           <center><h8 className="sticky-bottom">The Complete CableTV Complaint Registration System</h8></center> 
           </footer>   
     </div>
   );

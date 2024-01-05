@@ -12,7 +12,7 @@ import { AppBar, Toolbar, makeStyles } from '@material-ui/core';
 
 
 const Nav = styled.div`
-  background: #695879;
+  background: #001;
   height: 45px;
   display: flex;
   justify-content: flex-start;
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const Sidebar = () => {
+const Sidebarold = () => {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -163,4 +163,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Sidebarold;

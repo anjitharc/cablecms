@@ -15,31 +15,58 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import RoleManagement from './RoleManagement';
-
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData('Customers', 159, 0, 0, 4.0),
-    createData('Lead', 1 , 1, 1, 4.3),
-    createData('Complaint', 262, 1, 1, 6.0),
-    createData('Payment', 305, 0, 0, 4.3),
-    createData('Master', 1, 1, 1, 3.9),
-    createData('Settings', 1, 1, 1, 3.9),
-    createData('Complaint Category', 1, 1, 1, 3.9),
-    createData('Closed Complaint', 1, 1, 1, 3.9),
-  ];
-
+import { FormControlLabel } from '@mui/material';
+import axios from 'axios';
 
 const FullRole = () => {
 
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState('sm');
-  const [access , setAccess] = React.useState([]);
-  const [ checkedValues , setValue] = useState([]);
+  const [access, setAccess] = React.useState([]);
+  const [checkedValues, setValue] = useState([]);
+  const [roledtls, roledtlschange] = useState(null);
+  const [roleid, RoleIdchange] = useState(1);
+  const [currentstatus, currentstatuschange] = useState([]);
+  const [switchState, setSwitchState] = useState(false);
+  const [menuid, menuIdchange] = useState(null);
+  const [companyId, companyIdchange] = useState(null);
+  const [switchst, switchstchange] = useState(null);
+
+  useEffect(() => {
+    fetch(Url + "role_list")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        roledtlschange(resp.data);       
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  const handleCheckbox = (event) => {
+    const { value, checked } = event.target
+    if (checked) {
+      setValue(pre => [...pre, value])
+    } else (
+      setValue(pre => {
+        return [...pre.filter(skill => skill !== value)]
+      })
+    )
+
+    console.log(checkedValues);
+
+
+  }
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(access)
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,109 +76,116 @@ const FullRole = () => {
     setOpen(false);
   };
 
-    const [roledtls, roledtlschange] = useState(null);
-    const [roleid, RoleIdchange] = useState(1);
+const menuAlloc = (id , cmpid , swstatus) => {
+  menuIdchange(id);
+  companyIdchange(cmpid)
+  switchstchange(swstatus)
 
-    useEffect(() => {
-      fetch(Url + "role_list")
-        .then((res) => {
-          return res.json();
-        })
-        .then((resp) => {
-          roledtlschange(resp.data); 
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }, []);
+}
 
-   const handleCheckbox = (event) => {
-    const {value, checked } = event.target
-     if(checked){
-      setValue(pre => [...pre,value])
-     }else(
-      setValue(pre =>{
-        return [...pre.filter(skill => skill!==value)]
-      })
-     )
-     
-     console.log(checkedValues);
-    
+ const handleSwitchChange = async () => {
+  try {
+    // Update the switch state in the API
+    await axios.post( Url + 'menu_allocation', 
+    { accessStatus: !switchst,
+      companyId: companyId,
+      menuId: menuid ,
+      roleId:roleid ,
+    }); // Replace with your API endpoint
+    setSwitchState((prev) => !prev);   
 
-}   
+  } catch (error) {
+    console.error('Error updating switch state:', error);
+  }
+};
 
-    
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(access)
-    }
+useEffect(() => {
+  fetch(Url + "menu_allocation/" + roleid)
+    .then((res) => {
+      return res.json();
+    })
+    .then((resp) => {
+      currentstatuschange(resp.data);
+      setSwitchState(resp.data.accessStatus);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}, [roleid , switchState ]);
+
+
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-<Container maxWidth="md">
-    <div>
-    <FormControl style={{minWidth: 160 , minHeight: 100 }}>
-     <Select onChange={(e) =>
-        RoleIdchange(e.target.value)
-      } >
+    <div className='card'>
+      <div className='card-body'>
+        <form onSubmit={handleSubmit}>
+          <Container maxWidth="md">
+            <div className='card-columns'>
+              <FormControl style={{ minWidth: 160, minHeight: 50 }}>
+                <Select value={roleid} onChange={(e) =>
+                  RoleIdchange(e.target.value)
+                } >
 
-        {roledtls
-          ? roledtls.map((staffs) => {
-            return <MenuItem value={staffs.id}>{staffs.name}</MenuItem>;
-          }) : null}
-      </Select>
-      </FormControl>
-&nbsp;&nbsp; 
-      <BiPlus
-                type="button"
-                color="blue"
-                onClick={handleClickOpen}
-                size={40}
+                  {roledtls
+                    ? roledtls.map((staffs) => {
+                      return <MenuItem value={staffs.id}>{staffs.name}</MenuItem>;
+                    }) : null}
+                </Select>
+              </FormControl>
+              &nbsp;&nbsp;
+              <BiPlus hidden
+              type="button"
+              color="blue"
+              onClick={handleClickOpen}
+               size={40}
               />
 
+<br></br><br></br><br></br>
+            </div>
+            <div className='card'>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align='left'><b>Contents</b></TableCell>
+                    <TableCell align="left"><b>Permission</b></TableCell>
 
-    </div> 
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align='left'><b>Contents</b></TableCell>
-            <TableCell align="left"><b>Permission</b></TableCell>
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >             
-              <TableCell align="left">{row.name}</TableCell>            
-              <TableCell align="left"><Switch value={row.name} defaultChecked={row.fat} onChange={handleCheckbox}></Switch></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-     
-     
-      </Container>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {currentstatus.map((row) => (
+                    <TableRow
+                      key={row.menuId}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell align="left">{row.menu}</TableCell>
+                      <TableCell align="left"><Switch checked={row.accessStatus} onChange={handleSwitchChange} onClick={(e) => menuAlloc(row.menuId , row.companyId ,row.accessStatus)}></Switch>
+                     
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
 
-      <React.Fragment>      
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={handleClose}
-      >
-        <RoleManagement />   
-           <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-      <button className='btn btn-primary' hidden type='submit'>SUBMIT</button>
-    </form>
+          </Container>
+
+          <React.Fragment>
+            <Dialog
+              fullWidth={fullWidth}
+              maxWidth={maxWidth}
+              open={open}
+              onClose={handleClose}
+            >
+              <RoleManagement />
+              <DialogActions>
+                <Button onClick={handleClose}>Close</Button>
+              </DialogActions>
+            </Dialog>
+          </React.Fragment>
+          <button className='btn btn-primary' hidden type='submit'>SUBMIT</button>
+        </form>
+      </div>
     </div>
   )
 }

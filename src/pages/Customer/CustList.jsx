@@ -16,7 +16,6 @@ import {
   InputLabel,
   MenuItem,
   NativeSelect,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -34,12 +33,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Divider, Modal, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CustAddPop from "../Customer/CustAddPop";
+import CustAddPop from "./CustAddPop";
 import CustomerAdd from "./CustomerAdd";
 import NCust from "./NCust";
 
 const LeadList = () => {
-  const navigate = useNavigate();
+
   const [cuslist, cuslistchange] = useState(null);
   const [pageNo, pageNochange] = useState("1");
   const [pageSize, pageSizechange] = useState("10");
@@ -50,18 +49,6 @@ const LeadList = () => {
   const [loading, setLoading] = useState(true);
   const [openPopup, setOpenPopup] = useState(false);
   const [rmvstatus, rmvstatuschange] = useState(null);
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
 
 
   const handleClose = () => {
@@ -126,8 +113,7 @@ const LeadList = () => {
 
 
   return (
-    <div>
-      <Box height={10} />
+    <div>      
       <h5 align="left">Customer List - Cable TV</h5>
       <div className="card">       
         <div className="card-body">
