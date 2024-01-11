@@ -8,7 +8,7 @@ import { Url } from "../../Global";
 import toast from "react-hot-toast";
 import { Spinner } from "react-bootstrap";
 
-const CmplntFetch = () => {
+const CmplntFetch = ({ onClose }) => {
   const [serchname, serchnamechange] = useState("");
   const [categoryId, categoryIdchnge] = useState("");
   const [customer, customerchange] = useState("");
@@ -68,7 +68,7 @@ const [assignedStaffId , staffIdchange ] = useState();
       body: JSON.stringify(cmplntdta),
     })
       .then((res) => {         
-        window.location.reload();
+        onClose(); // Close the popup
       })
       .catch((err) => {
         console.log(err.message);
@@ -121,6 +121,7 @@ if(loadingfetch){
   return (
    
     <div>
+      
        {loading && <center><Spinner animation="border" variant="primary" /><h5>Assigning Complaint ....</h5></center> }
       <div className="offset">
         <form>
@@ -156,6 +157,13 @@ if(loadingfetch){
                       onClick={fetchbtn}
                     >
                       FETCH
+                    </button>
+                    <button
+                      className="btn btn-success"
+                      type="button"
+                      onClick={onClose}
+                    >
+                      Close
                     </button>
                   </div>
                 </div>

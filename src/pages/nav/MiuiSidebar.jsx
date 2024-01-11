@@ -167,7 +167,7 @@ export default function MiuiSidebar() {
   });
 
   useEffect(() => {
-    fetch(Url + "menu_allocation/1")
+    fetch(Url + "menu_allocation/" + userstatus[0].type)
       .then((res) => {
         return res.json();
       })
@@ -188,7 +188,7 @@ export default function MiuiSidebar() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar sx={{ height: "55px" }} position="fixed" open={open}>
+      <AppBar sx={{ height: "50px" }} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -226,6 +226,7 @@ export default function MiuiSidebar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+              <MenuItem component={Link} to="/settings">SETTINGS</MenuItem>
             </Menu>
           </Box>
 
@@ -253,7 +254,7 @@ export default function MiuiSidebar() {
             )}
           </IconButton>
         </DrawerHeader>
-        <h6>CableMan 2.0</h6>
+        <h6>CableMan CMS</h6>
         <Divider />
 
         <List>
@@ -315,7 +316,7 @@ export default function MiuiSidebar() {
             </ListItemButton>
           )}
           {payment && (
-            <ListItemButton component={Link} to="/">
+            <ListItemButton component={Link} to="/payment">
               <ListItemIcon>
                 <AiIcons.AiOutlineCreditCard />
               </ListItemIcon>

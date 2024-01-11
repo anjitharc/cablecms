@@ -20,6 +20,11 @@ export default function TeamList() {
   const [staffdta, staffdtachange] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
 
+
+  const closePopup = () => {
+    setOpenPopup(false);
+  };
+
   useEffect(() => {
     fetch(Url + "staff")
       .then((res) => {
@@ -32,7 +37,7 @@ export default function TeamList() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [openPopup]);
 
   return (
     <Fragment>
@@ -110,7 +115,7 @@ export default function TeamList() {
       </Container>
 
       <TeamPop openPopup={openPopup} setOpenPopup={setOpenPopup}>
-        <TeamAdd />
+        <TeamAdd onClose={closePopup}/>
       </TeamPop>
       </Fragment>
   );

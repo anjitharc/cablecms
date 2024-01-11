@@ -1,16 +1,18 @@
 {
   "name": "kvrdp",
   "version": "0.1.0",
-  "homepage": "https://cableman.app/",
+  "homepage": "http://103.146.174.105/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.17.0",
-    "@emotion/react": "^11.11.1",
+    "@emotion/react": "^11.11.3",
+    "@emotion/style": "^0.8.0",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.4",
-    "@mui/icons-material": "^5.11.16",
+    "@mui/icons-material": "^5.15.3",
+    "@mui/lab": "^5.0.0-alpha.159",
     "@mui/material": "^5.13.4",
     "@mui/styles": "^5.13.2",
     "@mui/x-data-grid": "^6.8.0",
@@ -21,9 +23,11 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "bootstrap-switch-button-react": "^1.2.0",
     "cdbreact": "^1.5.16",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
+    "http-proxy-middleware": "^2.0.6",
     "loginradius-react": "^0.2.0",
     "material-react-table": "^1.12.0",
     "material-ui-popup-state": "^5.0.10",
@@ -32,7 +36,7 @@
     "outline-icons": "^2.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
-    "react-datepicker": "^4.12.0",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
@@ -50,7 +54,7 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.7.32",
     "web-vitals": "^2.1.4",
-    "xlsx": "^0.18.5"    
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "set PORT=3000 && react-scripts start",
@@ -58,9 +62,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
- 
-  
   "eslintConfig": {
     "extends": [
       "react-app",

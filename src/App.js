@@ -1,11 +1,12 @@
-
 import './App.css';
 import Login from './Auth/Login';
 import axios from 'axios';
 import Footer from './pages/nav/Footer';
 import MasterLayout from './pages/MasterLayout';
+import SampleTest from './pages/SampleTest';
 //import TestCmp from './pages/Default/index'
 //import DefaultNav from './examples/Navbars/DefaultNavbar/DefaultNavbarDropdown'
+import cors from 'cors';
 
 
 
@@ -48,4 +49,5 @@ function App() {
   );
 
 }
+
 export default App;

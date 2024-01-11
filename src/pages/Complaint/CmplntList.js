@@ -55,6 +55,7 @@ const CmplntList = () => {
   const [complaintReason, complaintReasonchange] = useState("");
   const [statusup, statusupchange] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
 
 
   useEffect(() => {
@@ -73,9 +74,9 @@ const CmplntList = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [statusup]);
+  }, [statusup , openPopup]);
 
-  const [openPopup, setOpenPopup] = useState(false);
+
 
   const handleClickOpen = (ComplaintId) => (e) => {
     setOpen(true);
@@ -130,17 +131,19 @@ const CmplntList = () => {
       });
   }, []);
 
-    const [currentTime, setCurrentTime] = useState(new Date());
-  
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        setCurrentTime(new Date());
-      }, 1000); // Update every second
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-      return () => clearInterval(intervalId); // Cleanup on unmount
-    }, []);
-  
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // Update every second
 
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
+  const closePopup = () => {
+    setOpenPopup(false);
+  };
 
   return (
     <>
@@ -155,7 +158,7 @@ const CmplntList = () => {
           <div className="card-body">
             <div><Toaster position="top-center"
               reverseOrder={false} /></div><br></br>
-            <div>           
+            <div>
               <FcPlus type="button" size="29" style={{ float: "right" }} onClick={() => setOpenPopup(true)} />
 
               <Link to="/printcomplaint"> <AiOutlinePrinter
@@ -261,7 +264,7 @@ const CmplntList = () => {
         </div>
 
         <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
-          <CmplntFetch />
+          <CmplntFetch onClose={closePopup}/>
         </Popup>
       </Box>
     </>

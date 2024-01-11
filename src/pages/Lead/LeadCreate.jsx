@@ -27,8 +27,7 @@ const LeadCreate = ({ onClose }) => {
   const [leadCategory, leadCategorychnge] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    e.preventDefault();
+    e.preventDefault();    
     const leaddta = {
       name,
       address,

@@ -4,7 +4,7 @@ import { Url } from "../../Global";
 import { Stack, TextField } from "@mui/material";
 
 
-const TeamAdd = () => {
+const TeamAdd = ({ onClose }) => {
   const [name, namechange] = useState("");
   const [email, emailchange] = useState("");
   const [mobile, mobilechange] = useState("");
@@ -23,7 +23,8 @@ const TeamAdd = () => {
     })
       .then((res) => {
 
-  window.location.reload()
+      onClose();
+
       })
       .catch((err) => {
         console.log(err.message);
@@ -163,10 +164,7 @@ const TeamAdd = () => {
               <button className="btn btn-success" type="submit" onClick={handlesubmit}>
                 SAVE
               </button>
-              <Link to="/teamlist" className="btn btn-danger">
-                {" "}
-                BACK{" "}
-              </Link>
+              <button className="btn btn-danger" onClick={onClose}> BACK</button>
             </div>
           </div>
         </div>

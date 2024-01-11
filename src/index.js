@@ -6,12 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
-const corsOrigin ={
-  origin:'http://localhost:3000', //or whatever port your frontend is using
-  credentials:true,            
-  optionSuccessStatus:200
-}
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

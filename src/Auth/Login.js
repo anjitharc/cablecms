@@ -33,6 +33,7 @@ const Login = () => {
       method: "POST",      
       headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Headers': '*',
       },
       body: JSON.stringify(credentials),
     }).then((data) => data.json())

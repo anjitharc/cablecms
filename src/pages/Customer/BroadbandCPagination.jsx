@@ -8,15 +8,7 @@ import Select from "react-select";
 import { Url } from "../../Global";
 import ReactPaginate from "react-paginate";
 import {
-  Box,
-  Button,
-  FormControl,
-  IconButton,
-  InputBase,
-  InputLabel,
-  MenuItem,
-  NativeSelect,
-  Paper,
+  NativeSelect,  
   Table,
   TableBody,
   TableCell,
@@ -31,14 +23,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Label } from "recharts";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Divider, Modal, Typography } from "@mui/material";
+import { Divider, Modal, Stack, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustAddPop from "../Customer/CustAddPop";
 import CustomerAdd from "./CustomerAdd";
 import NCust from "./NCust";
 
-const CBroadband = () => {
+const BroadbandCPagination = () => {
   const navigate = useNavigate();
   const [cuslist, cuslistchange] = useState(null);
   const [pageNo, pageNochange] = useState("1");
@@ -50,26 +42,6 @@ const CBroadband = () => {
   const [loading, setLoading] = useState(true);
   const [openPopup, setOpenPopup] = useState(false);
   const [rmvstatus, rmvstatuschange] = useState(null);
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const custdta = {
     pageNo,
@@ -108,6 +80,9 @@ const CBroadband = () => {
   };
 
   const LoadEdit = () => { };
+  const handleSearch = () => {
+
+  };
 
   const removefntn = (id) => { 
    
@@ -127,41 +102,19 @@ const CBroadband = () => {
 
   return (
     <div>
-      <Box height={10} />
-      <div className="card">
-        <h3 className="card-header">CUSTOMER LIST</h3>
-        <div className="card-body">
-          <NativeSelect
-            style={{ float: "left" }}
-            onChange={(e) => pageSizechange(e.target.value)}
-            defaultValue={10}
-            inputProps={{
-              name: "age",
-              id: "uncontrolled-native",
-            }}
-          >
-            <option value={10}>10</option>
-            <option value={20}>30</option>
-            <option value={30}>50</option>
-            <option value={100}>100</option>
-          </NativeSelect>
+       <div align="left">
+            <h6><u>Broadband Customers</u></h6>
+        </div>
+      {/* Search input */}
+      <Stack direction="row" spacing={2} alignItems="center" mb={2} >
+        <TextField
+          label="Search"        
+          value={searchField}
+          onChange={(e) => searchFieldchange(e.target.value)}
+        />  
+    
+      </Stack>
 
-
-          <div className="divbtn">
-            <button className="btn btn-primary float-right" style={{ float: 'right', justifyContent: 'flex-end' }} onClick={() => setOpenPopup(true)
-            }>NEW </button>
-            <IconButton sx={{ p: "10px" }} aria-label="menu"></IconButton>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search "
-              onChange={(e) => searchFieldchange(e.target.value)}
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-            <br></br>
-          </div>
 
           <TableContainer>
             {!totalitem && (<center><h3>... No Customers Found ...</h3></center>)}
@@ -181,15 +134,24 @@ const CBroadband = () => {
                     <TableCell align="center">
                       <b>CRF No</b>
                     </TableCell>
-                    <TableCell align="left">
-                      <b>NAME</b>
+                    <TableCell align="center">
+                      <b>User Name</b>
                     </TableCell>
                     <TableCell align="left">
-                      <b>PHONE</b>
+                      <b>Name</b>
+                    </TableCell>
+                    <TableCell align="center">
+                      <b>Mobile</b>
                     </TableCell>
                     <TableCell align="left">
-                      <b>ADDRESS</b>
+                      <b>Address</b>
                     </TableCell>
+                    <TableCell align="left">
+                      <b>Area</b>
+                    </TableCell>
+                    <TableCell align="left">
+                      <b>Sub Area</b>
+                    </TableCell>                   
                     <TableCell align="center">
                       <b>ACTION</b>
                     </TableCell>
@@ -209,13 +171,16 @@ const CBroadband = () => {
                         <Link to={"/custdtls/" + row.id}>
                           <TableCell align="center">{row.crfNumber} </TableCell>
                         </Link>
+                        <TableCell align="center">{row.crfNumber} </TableCell>
                         <TableCell align="left">
                           {" "}
                           {row.firstName}&nbsp;{row.middleName}&nbsp;
                           {row.lastName}
                         </TableCell>
-                        <TableCell align="left">{row.phone}</TableCell>
+                        <TableCell align="center">{row.phone}</TableCell>
                         <TableCell align="left">{row.address}</TableCell>
+                        <TableCell align="left">{"Area"}</TableCell>
+                        <TableCell align="left">{"SubArea"}</TableCell>                        
                         <TableCell align="center">
 
                           <EditIcon
@@ -250,7 +215,10 @@ const CBroadband = () => {
             }
           </TableContainer>
           <br></br>
+           {/* Pagination */}
+
           <ReactPaginate
+            
             previousLabel={"Previous"}
             nextLabel={"Next"}
             breakLabel={"..."}
@@ -273,6 +241,21 @@ const CBroadband = () => {
           />
           <div className="row">
             <div>
+            <NativeSelect
+            style={{ float: "left" }}
+            onChange={(e) => pageSizechange(e.target.value)}
+            defaultValue={10}
+            inputProps={{
+              name: "age",
+              id: "uncontrolled-native",
+            }}
+          >
+            <option value={10}>10</option>
+            <option value={20}>30</option>
+            <option value={30}>50</option>
+            <option value={100}>100</option>
+          </NativeSelect> 
+          
               <h5 style={{ float: "right" }}>
                 TOTAL CUSTOMERS :{totalitem}
                 {loading ? (
@@ -300,9 +283,8 @@ const CBroadband = () => {
 
           </div>
         </div>
-      </div>
-    </div>
+
 
   );
 };
-export default CBroadband;
+export default BroadbandCPagination;

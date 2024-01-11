@@ -1,4 +1,4 @@
-import { Container, FormControl, MenuItem, Select, Switch, Table } from '@mui/material'
+import { Card, CardContent, Container, FormControl, Grid, List, ListItem, ListItemText, MenuItem, Select, Switch, Table, Typography } from '@mui/material'
 import React from 'react'
 import { useEffect } from 'react';
 import { Url } from '../../Global';
@@ -17,6 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import RoleManagement from './RoleManagement';
 import { FormControlLabel } from '@mui/material';
 import axios from 'axios';
+import { Paper } from '@material-ui/core';
 
 const FullRole = () => {
 
@@ -92,6 +93,7 @@ const menuAlloc = (id , cmpid , swstatus) => {
       menuId: menuid ,
       roleId:roleid ,
     }); // Replace with your API endpoint
+    SwitchRole();
     setSwitchState((prev) => !prev);   
 
   } catch (error) {
@@ -99,20 +101,25 @@ const menuAlloc = (id , cmpid , swstatus) => {
   }
 };
 
+const SwitchRole = () => {
+
+  fetch(Url + "menu_allocation/" + roleid)
+  .then((res) => {
+    return res.json();
+  })
+  .then((resp) => {
+    currentstatuschange(resp.data);
+    setSwitchState(resp.data.accessStatus);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+}
+
 
 useEffect(() => {
-  fetch(Url + "menu_allocation/" + roleid)
-    .then((res) => {
-      return res.json();
-    })
-    .then((resp) => {
-      currentstatuschange(resp.data);
-      setSwitchState(resp.data.accessStatus);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-}, [roleid , switchState ]);
+  SwitchRole();
+ }, [roleid]);
 
 
 
@@ -141,32 +148,9 @@ useEffect(() => {
                size={40}
               />
 
-<br></br><br></br><br></br>
+<br></br>
             </div>
-            <div className='card'>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align='left'><b>Contents</b></TableCell>
-                    <TableCell align="left"><b>Permission</b></TableCell>
-
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {currentstatus.map((row) => (
-                    <TableRow
-                      key={row.menuId}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell align="left">{row.menu}</TableCell>
-                      <TableCell align="left"><Switch checked={row.accessStatus} onChange={handleSwitchChange} onClick={(e) => menuAlloc(row.menuId , row.companyId ,row.accessStatus)}></Switch>
-                     
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+           
 
           </Container>
 
@@ -185,8 +169,39 @@ useEffect(() => {
           </React.Fragment>
           <button className='btn btn-primary' hidden type='submit'>SUBMIT</button>
         </form>
-      </div>
+      </div> 
+      <hr
+        style={{
+            color: "red",
+            backgroundColor: "red",
+            height: 5
+        }}
+    />
+      <Card>
+      <CardContent>    
+        <Grid container spacing={2}>    
+        
+          {currentstatus.map((item, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+            
+            <ListItem key={index}>
+              <FormControlLabel
+      control={<Switch checked={item.accessStatus} onChange={handleSwitchChange} onClick={(e) => menuAlloc(item.menuId , item.companyId ,item.accessStatus)}/>}
+     
+    />
+              <ListItemText primary={item.menu} />
+            </ListItem>
+            
+        </Grid>
+          ))}
+         
+        </Grid>
+      </CardContent>
+    </Card>
+
     </div>
+
+    
   )
 }
 

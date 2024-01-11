@@ -16,6 +16,7 @@ import {
   InputLabel,
   MenuItem,
   NativeSelect,
+  Paper,
   Table,
   TableBody,
   TableCell,
@@ -30,15 +31,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Label } from "recharts";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Divider, Modal, Typography } from "@mui/material";
+import { Divider, Modal, Stack, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CustAddPop from "./CustAddPop";
+import CustAddPop from "../Customer/CustAddPop";
 import CustomerAdd from "./CustomerAdd";
 import NCust from "./NCust";
 
-const LeadList = () => {
-
+const CustList = () => {
+  const navigate = useNavigate();
   const [cuslist, cuslistchange] = useState(null);
   const [pageNo, pageNochange] = useState("1");
   const [pageSize, pageSizechange] = useState("10");
@@ -49,14 +50,6 @@ const LeadList = () => {
   const [loading, setLoading] = useState(true);
   const [openPopup, setOpenPopup] = useState(false);
   const [rmvstatus, rmvstatuschange] = useState(null);
-
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const custdta = {
     pageNo,
@@ -95,6 +88,9 @@ const LeadList = () => {
   };
 
   const LoadEdit = () => { };
+  const handleSearch = () => {
+
+  };
 
   const removefntn = (id) => { 
    
@@ -113,41 +109,20 @@ const LeadList = () => {
 
 
   return (
-    <div>      
-      <h5 align="left">Customer List - Cable TV</h5>
-      <div className="card">       
-        <div className="card-body">
-          <NativeSelect
-            style={{ float: "left" }}
-            onChange={(e) => pageSizechange(e.target.value)}
-            defaultValue={10}
-            inputProps={{
-              name: "age",
-              id: "uncontrolled-native",
-            }}
-          >
-            <option value={10}>10</option>
-            <option value={20}>30</option>
-            <option value={30}>50</option>
-            <option value={100}>100</option>
-          </NativeSelect>
+    <div>
+       <div align="left">
+            <h6><u>Cable TV Customers</u></h6>
+        </div>
+      {/* Search input */}
+      <Stack direction="row" spacing={2} alignItems="center" mb={2} >
+        <TextField
+          label="Search"        
+          value={searchField}
+          onChange={(e) => searchFieldchange(e.target.value)}
+        />  
+    
+      </Stack>
 
-
-          <div className="divbtn">
-            <button className="btn btn-primary float-right" style={{ float: 'right', justifyContent: 'flex-end' }} onClick={() => setOpenPopup(true)
-            }>NEW </button>
-            <IconButton sx={{ p: "10px" }} aria-label="menu"></IconButton>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search "
-              onChange={(e) => searchFieldchange(e.target.value)}
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-            <br></br>
-          </div>
 
           <TableContainer>
             {!totalitem && (<center><h3>... No Customers Found ...</h3></center>)}
@@ -179,6 +154,12 @@ const LeadList = () => {
                     <TableCell align="left">
                       <b>ADDRESS</b>
                     </TableCell>
+                    <TableCell align="left">
+                      <b>AREA</b>
+                    </TableCell>
+                    <TableCell align="left">
+                      <b>SUB AREA</b>
+                    </TableCell>
                     <TableCell align="center">
                       <b>AMOUNT</b>
                     </TableCell>
@@ -209,6 +190,8 @@ const LeadList = () => {
                         </TableCell>
                         <TableCell align="center">{row.phone}</TableCell>
                         <TableCell align="left">{row.address}</TableCell>
+                        <TableCell align="left">{"Area"}</TableCell>
+                        <TableCell align="left">{"SubArea"}</TableCell>
                         <TableCell align="center">{"0"}</TableCell>
                         <TableCell align="center">
 
@@ -244,7 +227,10 @@ const LeadList = () => {
             }
           </TableContainer>
           <br></br>
+           {/* Pagination */}
+
           <ReactPaginate
+            
             previousLabel={"Previous"}
             nextLabel={"Next"}
             breakLabel={"..."}
@@ -267,6 +253,21 @@ const LeadList = () => {
           />
           <div className="row">
             <div>
+            <NativeSelect
+            style={{ float: "left" }}
+            onChange={(e) => pageSizechange(e.target.value)}
+            defaultValue={10}
+            inputProps={{
+              name: "age",
+              id: "uncontrolled-native",
+            }}
+          >
+            <option value={10}>10</option>
+            <option value={20}>30</option>
+            <option value={30}>50</option>
+            <option value={100}>100</option>
+          </NativeSelect> 
+          
               <h5 style={{ float: "right" }}>
                 TOTAL CUSTOMERS :{totalitem}
                 {loading ? (
@@ -294,9 +295,8 @@ const LeadList = () => {
 
           </div>
         </div>
-      </div>
-    </div>
+
 
   );
 };
-export default LeadList;
+export default CustList;
