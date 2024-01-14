@@ -7,6 +7,7 @@ import SampleTest from './pages/SampleTest';
 //import TestCmp from './pages/Default/index'
 //import DefaultNav from './examples/Navbars/DefaultNavbar/DefaultNavbarDropdown'
 import cors from 'cors';
+import SettingMenu from './pages/Settings/SettingMenu';
 
 
 
@@ -42,7 +43,7 @@ function App() {
 
 <div className="App">
 
-<MasterLayout />
+<SettingMenu />
 <Footer />
  </div>
  

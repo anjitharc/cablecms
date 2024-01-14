@@ -1,0 +1,13 @@
+.buttontop {
+    padding-bottom: .5cm;
+}
+
+.header_top{
+    text-align: left;
+    font-size: 21px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
