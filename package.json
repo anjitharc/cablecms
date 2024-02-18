@@ -1,7 +1,7 @@
 {
   "name": "CableMan",
   "version": "0.1.0",
-  "homepage": "http://cableman.app/",
+  "homepage": "https://cableman.app/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.17.0",
@@ -27,7 +27,6 @@
     "cdbreact": "^1.5.16",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",
-    "http-proxy-middleware": "^2.0.6",
     "loginradius-react": "^0.2.0",
     "material-react-table": "^1.12.0",
     "material-ui-popup-state": "^5.0.10",
@@ -79,5 +78,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }

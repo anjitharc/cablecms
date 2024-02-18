@@ -116,7 +116,7 @@ export default function Home() {
             </div>
         </div>
 
-        <div className='charts'>
+        {/* <div className='charts'>
             <ResponsiveContainer width="100%" height="100%">
             <BarChart
             width={500}
@@ -161,7 +161,7 @@ export default function Home() {
                 </LineChart>
             </ResponsiveContainer>
 
-        </div>
+        </div> */}
     </main>
   )
 }

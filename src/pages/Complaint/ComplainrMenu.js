@@ -52,7 +52,7 @@ export default function ComplainrMenu() {
   };
 
   return (
-    <div className='card'>
+    
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -76,6 +76,6 @@ export default function ComplainrMenu() {
         <ComplaintCtgry />
       </CustomTabPanel>
     </Box>
-    </div>
+   
   );
 }

@@ -200,12 +200,12 @@ export default function MiuiSidebar() {
             <MenuIcon />
           </IconButton>
           <Typography component="div" sx={{ flexGrow: 1 }}>
-          <h6 align="right" style={{ alignContent: 'right' }}>Hi {userstatus[0].name}</h6>
+          <h6 align="right" style={{ alignContent: 'right', marginRight:'20px' , marginBottom:'20px'}}>Hi {userstatus[0].name}</h6>
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 , marginBottom:'13px'}}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -284,13 +284,13 @@ export default function MiuiSidebar() {
 )}
           <Collapse in={drop} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton component={Link} to="/Custlist">
+              <ListItemButton sx={{ pl: 4 }} component={Link} to="/Custlist">
                 <ListItemIcon>
                   <AiOutlineUser />
                 </ListItemIcon>
                 <ListItemText primary={"Cable TV"} />
               </ListItemButton>
-              <ListItem button component={Link} to="/CBroadband">
+              <ListItem button  sx={{ pl: 4 }} component={Link} to="/CBroadband">
                 <ListItemIcon>
                   <AiIcons.AiTwotoneDashboard />
                 </ListItemIcon>
@@ -331,14 +331,14 @@ export default function MiuiSidebar() {
               <ListItemText primary={"Master"} />
             </ListItemButton>
           )}
-          {setting && (
+          {/* {setting && (
             <ListItemButton component={Link} to="/settings">
               <ListItemIcon>
                 <AiFillSetting />
               </ListItemIcon>
               <ListItemText primary={"Settings"} />
             </ListItemButton>
-          )}
+          )} */}
 
           {/* Add more links as needed */}
         </List>

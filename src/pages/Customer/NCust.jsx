@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import Controls from "../../components/controls/Controls";
 import "./Customer_Create.css";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function NCust({ onClose }) {
   
@@ -75,8 +76,12 @@ export default function NCust({ onClose }) {
   }, []);
 
   return (
-    <div class="container">
-      <div class="text">Customer Registration</div>
+    <Container>
+      <Row>
+        <Col md="4" className="flex-auto">
+      <h6>Customer Registration</h6>
+      </Col>
+      </Row>
       <form validate required onSubmit={handlesubmit}>
         <div class="form-row">
 
@@ -194,6 +199,6 @@ export default function NCust({ onClose }) {
         <Controls.Button text="Close" color="default" onClick={onClose}/>
         </div>
       </form>
-    </div>
+    </Container>
   );
 }

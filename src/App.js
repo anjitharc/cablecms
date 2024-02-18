@@ -7,7 +7,7 @@ import SampleTest from './pages/SampleTest';
 //import TestCmp from './pages/Default/index'
 //import DefaultNav from './examples/Navbars/DefaultNavbar/DefaultNavbarDropdown'
 import cors from 'cors';
-import SettingMenu from './pages/Settings/SettingMenu';
+import Signin from './Auth/Signin';
 
 
 
@@ -28,9 +28,6 @@ import SettingMenu from './pages/Settings/SettingMenu';
  // }
 //}
 
-axios.create({
-  baseURL: "http://103.146.174.105:8080/TECHNIQUES/techniques/" 
-});
 
 function App() {
 
@@ -43,7 +40,7 @@ function App() {
 
 <div className="App">
 
-<SettingMenu />
+<MasterLayout />
 <Footer />
  </div>
  

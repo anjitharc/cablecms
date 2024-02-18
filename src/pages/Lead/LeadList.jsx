@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserMinus, FaRegEdit, FaWindowClose } from "react-icons/fa";
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -70,14 +71,12 @@ export default function LeadList() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [rmvstatus , isPopupOpen , isPopupOpenLE]);
+  }, [rmvstatus, isPopupOpen, isPopupOpenLE]);
 
   const editpops = (id) => {
     setPopupOpenLE(true);
     setVariableToSend(id);
-
   };
-
 
   const openPopup = () => {
     setPopupOpen(true);
@@ -95,11 +94,8 @@ export default function LeadList() {
     setPopupOpenLE(false);
   };
 
-  
-
   return (
-    <div className="card">
-      <div className="card-body">
+   <Box>
         <div className="divbtn">
           <div>
             <Toaster position="top-center" reverseOrder={false} />
@@ -111,8 +107,13 @@ export default function LeadList() {
             onClick={openPopup}
           />
           {isPopupOpen && <LeadCreate onClose={closePopup} />}
-          {isPopupOpenLE && <EditLead onClose={closePopupLE}  variableFromPage={variableToSend}/>}
-          
+          {isPopupOpenLE && (
+            <EditLead
+              onClose={closePopupLE}
+              variableFromPage={variableToSend}
+            />
+          )}
+
           <br></br>
           <br></br>
         </div>
@@ -142,7 +143,7 @@ export default function LeadList() {
                 <TableCell align="left">
                   <b>TYPE</b>
                 </TableCell>
-                <TableCell align="center">
+                <TableCell align="left">
                   <b>ACTION</b>
                 </TableCell>
               </TableRow>
@@ -164,40 +165,42 @@ export default function LeadList() {
                     <TableCell align="left">{row.area}</TableCell>
                     <TableCell align="left">{row.type}</TableCell>
                     <TableCell align="center">
-                   
-                      <FaRegEdit
-                        size={20}
-                        type="button"
-                        onClick={() => {
-                          editpops(row.id);
-                        }}
-                      />
-                     
-                      &nbsp;&nbsp;&nbsp;
-                      <FaUserMinus
-                        type="button"
-                        color="red"
-                        size={20}
-                        onClick={() => {
-                          removefntn(row.id);
-                        }}
-                      />
-                      &nbsp;&nbsp;&nbsp;
-                      <FaWindowClose
-                        type="button"
-                        size={20}
-                        onClick={() => {
-                          closebtn(row.id);
-                        }}
-                      ></FaWindowClose>{" "}                     
+                      <div className="flex items-center space-x-4">
+                        <div>
+                          <FaRegEdit
+                            size={20}
+                            type="button"
+                            onClick={() => {
+                              editpops(row.id);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <FaUserMinus
+                            type="button"
+                            color="red"
+                            size={20}
+                            onClick={() => {
+                              removefntn(row.id);
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <FaWindowClose
+                            type="button"
+                            size={20}
+                            onClick={() => {
+                              closebtn(row.id);
+                            }}
+                          ></FaWindowClose>
+                        </div>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
-        </TableContainer>      
-     
-      </div>
-    </div>
+        </TableContainer>
+   </Box>
   );
 }

@@ -5,6 +5,7 @@ import { FaUserMinus, FaRegEdit } from "react-icons/fa";
 import { BiPlusMedical, BiUserPlus } from "react-icons/bi";
 import {
   Box,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -41,7 +42,7 @@ import "./cmplist.css";
 import toast, { Toaster } from "react-hot-toast";
 import AddIcon from '@mui/icons-material/Add';
 import { FcPlus } from "react-icons/fc";
-import './cmplist.css';
+
 
 const CmplntList = () => {
   const [open, setOpen] = useState(false);
@@ -147,15 +148,15 @@ const CmplntList = () => {
 
   return (
     <>
-      <Box>
+      <Container maxWidth>
 
+      <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} >
 
-
-        <div className="card">
-          <h5 className="card-header">COMPLAINT LIST</h5>
+       
+          <h5 align="left" >COMPLAINT LIST</h5>
           {loading &&
             <LinearProgress />}
-          <div className="card-body">
+         
             <div><Toaster position="top-center"
               reverseOrder={false} /></div><br></br>
             <div>
@@ -171,7 +172,7 @@ const CmplntList = () => {
               ></AiOutlinePrinter></Link></div>
             <br></br>
             <br></br>
-            <TableContainer >
+            <TableContainer className="flex">
               <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
                   <TableRow>
@@ -260,13 +261,14 @@ const CmplntList = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </div>
-        </div>
+         
+        
 
         <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
           <CmplntFetch onClose={closePopup}/>
         </Popup>
-      </Box>
+</Box>
+        </Container>
     </>
   );
 

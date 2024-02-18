@@ -13,7 +13,8 @@ import MasterMenu from './Master/MasterMenu';
 import CustomerDetails from './Customer/CustomerDetails';
 import BroadbandCPagination from './Customer/BroadbandCPagination';
 import PaymentMenu from './Payment/PaymentMenu';
-import SettingsMenu from './Master/SettingsMenu';
+import SettingsMenu from './Settings/SettingsMenu';
+import Err404 from './Error/Err404';
 
 
 const MasterLayout = () => {
@@ -28,6 +29,7 @@ const MasterLayout = () => {
           {/* Define your routes for the main content */}
           <Routes>
           <Route path="/" element={<Dashboard />}></Route>
+          <Route path="*" element={<Err404 />} />
           <Route path="/leadlist" element={<LeadList />} />
           <Route path="/CableCustomerlist" element={<CustListPagin />} ></Route>
           <Route path="/masterlist" element={<MasterList />} > </Route>

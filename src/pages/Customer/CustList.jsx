@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Url } from "../../Global";
 import ReactPaginate from "react-paginate";
 import {
+  Box,
+  Container,
   NativeSelect,
   Table,
   TableBody,
@@ -20,6 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CustAddPop from "../Customer/CustAddPop";
 import NCust from "./NCust";
 import "./CustList.css";
+import { Stack } from "@mui/material";
 
 const CustList = () => {
   const [cuslist, cuslistchange] = useState(null);
@@ -86,31 +89,45 @@ const CustList = () => {
   };
 
   return (
-    <div>
+    <Container maxWidth>
       <div align="left">
         <p class="header_top">
           <u>Cable TV Customers</u>
         </p>
       </div>
       {/* Search input */}
-      <div>
-        <div align="left">
-          <TextField
-            label="Search"
-            value={searchField}
-            onChange={(e) => searchFieldchange(e.target.value)}
-          />
-        </div>
-        <div class="buttontop" align="right">
-          <input
-            align="right"
-            type="button"
-            className="btn btn-primary"
-            value="Create Customer"
-            onClick={() => setOpenPopup(true)}
-          />
-        </div>
+
+      <div align="left">
+        <TextField
+          label="Search"
+          value={searchField}
+          onChange={(e) => searchFieldchange(e.target.value)}
+        />
       </div>
+      <Box
+        sx={{
+          flexDirection: "row"          
+        }}
+      >
+        <Stack
+          spacing={2}
+          direction="row"
+          justifyContent="right"
+          marginBottom="25px"
+        >
+          
+          <button type="button" class="btn btn-secondary" onClick={() => setOpenPopup(true)}>
+            Upload Customer
+          </button>
+
+          <button
+           type="button" class="btn btn-secondary"          
+            onClick={() => setOpenPopup(true)}
+          >
+            Create Customer
+          </button>
+        </Stack>
+      </Box>
 
       <TableContainer>
         {!totalitem && (
@@ -276,7 +293,7 @@ const CustList = () => {
           <NCust onClose={closePopup} />
         </CustAddPop>
       </div>
-    </div>
+    </Container>
   );
 };
 export default CustList;

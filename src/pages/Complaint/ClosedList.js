@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUserMinus, FaRegEdit } from "react-icons/fa";
 import { BiUserPlus } from "react-icons/bi";
 import { Url } from "../../Global";
-import { Backdrop, CircularProgress, Divider, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { Backdrop, Box, CircularProgress, Container, Divider, LinearProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@material-ui/core";
 import ReactPaginate from "react-paginate";
+
+
 
 const ClosedList = () => {
 
@@ -36,12 +38,19 @@ const ClosedList = () => {
   }, []);
 
 
+
   return (
     <>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="rs-table-affix-header" style={{ textAlign: "left" }}><u>Closed Complaints</u></h5>
+     <Container maxWidth>
+          <h5 className="rs-table-affix-header" style={{ textAlign: "left" , marginBottom: '30px'}}>Closed Complaints</h5>
           <Divider />
+<Box>
+
+
+
+
+</Box>
+
           {loading &&
             <LinearProgress />}
           <TableContainer>
@@ -104,9 +113,7 @@ const ClosedList = () => {
             activeClassName="active"
           />
 
-        </div>
-
-      </div>
+    </Container>
     </>
   );
 };

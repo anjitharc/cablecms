@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
 import { useEffect } from 'react';
 import { Url } from '../../Global';
+import { Box } from '@material-ui/core';
 
 const ClosedLead = () => {
   const [page, setPage] = useState(0);
@@ -32,9 +33,9 @@ const ClosedLead = () => {
 
   return (
    
-    <div className='card'>
+  <Box maxWidth>
        
-      <h6 className="card-header" align="left">Closed Lead</h6>
+      <h6 className="card-header" style={{marginBottom:'30px'}} align="left">Closed Lead</h6>
      
     <Paper>
       <TableContainer>
@@ -75,7 +76,7 @@ const ClosedLead = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
-    </div>
+    </Box>
   );
 };
 

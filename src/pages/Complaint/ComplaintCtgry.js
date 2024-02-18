@@ -1,6 +1,9 @@
 import {
   Divider,
+  FormControl,
+  Grid,
   Input,
+  MenuItem,
   Paper,
   Table,
   TableBody,
@@ -14,7 +17,8 @@ import { BiCapsule, BiPlus } from "react-icons/bi";
 import { FaRegEdit, FaUserMinus } from "react-icons/fa";
 import { HiArchiveBoxXMark } from "react-icons/hi2";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { Url  } from "../../Global";
+import { Url } from "../../Global";
+import { Select } from "@mui/material";
 
 const ComplaintCtgry = () => {
   const [name, namechange] = useState("");
@@ -76,7 +80,7 @@ const ComplaintCtgry = () => {
       })
         .then((res) => {
           namechange();
-          decsriptionchange();          
+          decsriptionchange();
         })
         .catch((err) => {
           console.log(err.message);
@@ -97,109 +101,127 @@ const ComplaintCtgry = () => {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        
-        <Divider />
 
-        <div className="card-body m-sm-3">
-          <div className="container-sm">
-            <div class="form-group mb-3">
-              <Input
-                variant="outlined"
-                className="form-control-lg"
-                required
-                type="text"
-                value={name}
-                onChange={(e) => namechange(e.target.value)}
-                placeholder="COMPLAINT"
-              ></Input>{" "}
-              &nbsp; &nbsp;
-              <Input
-                className="form-control-lg"
-                variant="outlined"
-                required
-                type="text"
-                value={description}
-                onChange={(e) => decsriptionchange(e.target.value)}
-                placeholder="DESCRIPTION"
-              ></Input>
-              &nbsp;&nbsp;
-              {addbtn && (
-              <BiPlus
-                type="button"
-                color="blue"
-                onClick={handlesubmit}
-                size={40}
-              /> )}
-              {updatebtn && (
-              <button className="btn btn-primary" onClick={updatefntn}>
-                UPDATE
-              </button> )}
-            </div>
-          </div>
-        </div>
-       
-        <TableContainer>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">
-                  <b>Sl.No</b>
-                </TableCell>
-                <TableCell align="left">
-                  <b>CATOGORY</b>
-                </TableCell>
-                <TableCell align="left">
-                  <b>DESCRIPTION</b>
-                </TableCell>
-                <TableCell align="center">
-                  <b>ACTION</b>
-                </TableCell>
-              </TableRow>
-            </TableHead>
+    <>
+      <Divider />
 
-            <TableBody>
-              {cmpntctgry &&
-                cmpntctgry.map((row, index) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 5 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {" "}
-                      <center> {index + 1}</center>
-                    </TableCell>
-                    <TableCell align="left">{row.name}</TableCell>
-                    <TableCell align="left">{row.description}</TableCell>
-                    <TableCell align="center">
-                      {" "}
-                      <div>
-                        <FaRegEdit
-                          size={20}
-                          type="button"
-                          onClick={() => {
-                            editfnctn(row.id);
-                          }}
-                        />
-                        &nbsp;&nbsp;&nbsp;
-                        <HiArchiveBoxXMark
-                          type="button"
-                          color="red"
-                          size={20}
-                          onClick={() => {
-                            removefntn(row.id);
-                          }}
-                        />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-    </div>
+
+      <Grid container rowSpacing="15px" alignItems="center" style={{ marginBottom: "25px", marginTop: "25px"}}>
+        <FormControl style={{ minWidth: 120, flexDirection: "row" , paddingRight:"10px"}}>
+          <Input
+            variant="outlined"
+            className="form-control-lg"
+            required
+            type="text"
+            value={name}
+            onChange={(e) => namechange(e.target.value)}
+            placeholder="COMPLAINT"
+          ></Input>
+          &nbsp; &nbsp;
+          <Input
+            className="form-control-lg"
+            variant="outlined"
+            required
+            type="text"
+            value={description}
+            onChange={(e) => decsriptionchange(e.target.value)}
+            placeholder="DESCRIPTION"
+          ></Input>
+          &nbsp; &nbsp;
+
+          <select
+            style={{ minWidth: 190 }}
+            variant="standard"
+            required
+            placeholder="CATEGORY"
+          >
+
+            <option value={10}>Broadband</option>
+            <option value={20}>Cable TV</option>
+
+
+          </select>
+        </FormControl>
+        &nbsp;&nbsp;
+        {addbtn && (
+          <BiPlus
+            type="button"
+            color="blue"
+            onClick={handlesubmit}
+            size={40}
+          />)}
+        {updatebtn && (
+          <button className="btn btn-primary" onClick={updatefntn}>
+            UPDATE
+          </button>)}
+
+      </Grid>
+
+
+      <TableContainer>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">
+                <b>Sl.No</b>
+              </TableCell>
+              <TableCell align="left">
+                <b>COMPLAINT</b>
+              </TableCell>
+              <TableCell align="left">
+                <b>DESCRIPTION</b>
+              </TableCell>
+              <TableCell align="left">
+                <b>CATEGORY</b>
+              </TableCell>
+              <TableCell align="left">
+                <b>ACTION</b>
+              </TableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {cmpntctgry &&
+              cmpntctgry.map((row, index) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 5 } }}
+                >
+                  <TableCell component="th" scope="row">
+
+                    <center> {index + 1}</center>
+                  </TableCell>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.description}</TableCell>
+                  <TableCell align="left">CABLE TV</TableCell>
+                  <TableCell align="center">
+
+
+                    <div className="flex items-center space-x-4">
+                      <FaRegEdit
+                        size={20}
+                        type="button"
+                        onClick={() => {
+                          editfnctn(row.id);
+                        }}
+                      />
+
+                      <HiArchiveBoxXMark
+                        type="button"
+                        color="red"
+                        size={20}
+                        onClick={() => {
+                          removefntn(row.id);
+                        }}
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 

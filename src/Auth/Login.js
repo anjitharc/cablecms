@@ -6,10 +6,7 @@ import { useState } from "react";
 import swal from "sweetalert";
 import Button from "@material-ui/core/Button";
 import ReactLoading from 'react-loading';
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Spinner } from "react-bootstrap";
-
 
 
 
@@ -29,12 +26,12 @@ const Login = () => {
 
   async function loginUser(credentials) {
     setLoading(true);
-    return fetch("http://103.146.174.105:8080/TECH/techniques/logins", {
+    return fetch('http://103.146.174.105:8080/TECH/techniques/logins', {
       method: "POST",      
       headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Headers': '*',
-      },
+        "Content-Type": "application/json",   
+       
+      },     
       body: JSON.stringify(credentials),
     }).then((data) => data.json())
     

@@ -42,7 +42,7 @@ export default function TeamList() {
   return (
     <Fragment>
       <Container maxWidth="lg" fixed>
-        
+
         <BiPlusMedical
           onClick={() => setOpenPopup(true)}
           type="button"
@@ -59,7 +59,7 @@ export default function TeamList() {
             sx={{ minWidth: 650 }}
             aria-label="simple table"
           >
-            <TableHead sx={{fontSize: 5 }}>
+            <TableHead sx={{ fontSize: 5 }}>
               <TableRow>
                 <TableCell align="center"><b>Sl.No</b></TableCell>
                 <TableCell align="left"><b>Name</b></TableCell>
@@ -76,7 +76,7 @@ export default function TeamList() {
                 staffdta.map((row, index) => (
                   <TableRow
                     key={row.name}
-                   
+
                   >
                     <TableCell align="center" component="th" scope="row">
                       {index + 1}
@@ -87,26 +87,29 @@ export default function TeamList() {
                     <TableCell align="left">{row.userName}</TableCell>
                     <TableCell align="left">{row.password}</TableCell>
                     <TableCell align="left">{row.typeName}</TableCell>
-                    <TableCell align="left"> 
-                  
-     
-                  <FaRegEdit
+                    <TableCell align="left">
+
+                      <div className="flex items-center space-x-4">
+                        <div>
+                          <FaRegEdit
                             size={20} type="button"
                             onClick={() => {
-                             
+
                             }}
                           />
-                          &nbsp;&nbsp;&nbsp;
-                          <FaUserMinus type="button"
-                            color="red"
-                            size={20}
-                            onClick={() => {
-                             
-                            }}
-                          />
-                          &nbsp;&nbsp;&nbsp;
-                          </TableCell>
-              
+                        </div>
+                        <div>                      <FaUserMinus type="button"
+                          color="red"
+                          size={20}
+                          onClick={() => {
+
+                          }}
+                        />
+                        </div>
+
+                      </div>
+                    </TableCell>
+
                   </TableRow>
                 ))}
             </TableBody>
@@ -115,8 +118,8 @@ export default function TeamList() {
       </Container>
 
       <TeamPop openPopup={openPopup} setOpenPopup={setOpenPopup}>
-        <TeamAdd onClose={closePopup}/>
+        <TeamAdd onClose={closePopup} />
       </TeamPop>
-      </Fragment>
+    </Fragment>
   );
 }
